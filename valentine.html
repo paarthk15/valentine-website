@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be My Valentine ❤️</title>
+
+<style>
+body {
+    margin:0;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg,#ff758c,#ff7eb3);
+    overflow:hidden;
+    text-align:center;
+}
+
+h1 {
+    color:white;
+    font-size:2.8rem;
+}
+
+button {
+    padding:15px 35px;
+    font-size:1.5rem;
+    border:none;
+    border-radius:40px;
+    cursor:pointer;
+    margin:10px;
+    transition:0.3s;
+}
+
+#yesBtn {
+    background:#ff2e63;
+    color:white;
+}
+
+#noBtn {
+    background:#444;
+    color:white;
+    position:relative;
+}
+
+#sassText {
+    color:white;
+    margin-top:20px;
+    font-size:1.1rem;
+    max-width:80%;
+}
+
+#memoryImage {
+    display:none;
+    margin-top:25px;
+    max-width:300px;
+    border-radius:20px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.3);
+    transition:0.4s;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Will You Be My Valentine? ❤️</h1>
+
+<button id="yesBtn">Yes 💖</button>
+<button id="noBtn">No 😢</button>
+
+<p id="sassText"></p>
+
+<img id="memoryImage">
+
+<script>
+
+let yesSize = 1.5;
+let imageIndex = 0;
+
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const sassText = document.getElementById("sassText");
+const memoryImage = document.getElementById("memoryImage");
+
+// 13 images for NO clicks
+const images = [
+"images/memory1.jpg",
+"images/memory2.jpg",
+"images/memory3.jpg",
+"images/memory4.jpg",
+"images/memory5.jpg",
+"images/memory6.jpg",
+"images/memory7.jpg",
+"images/memory8.jpg",
+"images/memory9.jpg",
+"images/memory10.jpg",
+"images/memory11.jpg",
+"images/memory12.jpg",
+"images/memory14.jpg",
+"images/memory13.jpg"
+];
+
+// Sass messages
+const sassMessages = [
+"Interesting choice… but incorrect.",
+"Are you sure? Look at this memory 🥺",
+"We were adorable here.",
+"Bold of you to think that was an option.",
+"You and I both know you're clicking Yes eventually.",
+"Stop playing. We look too good together.",
+"Every 'No' increases my attractiveness by 10%.",
+"You're stalling because you're blushing.",
+"Resistance is cute. Temporary, but cute."
+];
+
+let sassIndex = 0;
+
+noBtn.addEventListener("click", function() {
+    // Grow YES button
+    yesSize += 0.4;
+    yesBtn.style.fontSize = yesSize + "rem";
+    yesBtn.style.padding = (yesSize * 10) + "px";
+
+    // Move NO button randomly
+    noBtn.style.position = "absolute";
+    noBtn.style.left = Math.random() * (window.innerWidth - 100) + "px";
+    noBtn.style.top = Math.random() * (window.innerHeight - 50) + "px";
+
+    // Show next memory image
+    memoryImage.style.display = "block";
+    memoryImage.style.opacity = 0;
+
+    setTimeout(() => {
+        memoryImage.src = images[imageIndex];
+        memoryImage.style.opacity = 1;
+        imageIndex = (imageIndex + 1) % images.length;
+    }, 200);
+
+    // Show sass message
+    sassText.textContent = sassMessages[sassIndex];
+    sassIndex = (sassIndex + 1) % sassMessages.length;
+});
+
+// YES BUTTON CLICK — FINAL REVEAL
+yesBtn.addEventListener("click", function(){
+
+    document.body.innerHTML = `
+        <h1 style="color:white;">YAYYYYY ❤️😍</h1>
+        <p style="color:white; font-size:1.5rem;">
+        I knew our memories would win 💕
+        </p>
+        <p style="color:white;">Happy Valentine's Day ❤️</p>
+        <img src="images/kiss.jpg" style="margin-top:20px; width:320px; border-radius:20px; box-shadow:0 10px 25px rgba(0,0,0,0.4);">
+        <video src="videos/dance.mp4" controls autoplay style="margin-top:20px; width:340px; border-radius:20px;"></video>
+    `;
+});
+
+</script>
+
+</body>
+</html>
